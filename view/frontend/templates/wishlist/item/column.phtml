@@ -1,0 +1,17 @@
+<?php if ($_item->getProduct()->isVisibleInSiteVisibility()): ?>
+    <div class="product-item-actions">
+        <a href="<?= $block->escapeUrl($block->getUrl('wishlist/index/add', ['item' => $_item->getId()])) ?>"
+           title="<?= $block->escapeHtml(__('Add to Cart')) ?>"
+           class="action add-to-cart">
+            <span><?= $block->escapeHtml(__('Add to Cart')) ?></span>
+        </a>
+        <a href="<?= $block->escapeUrl($block->getUrl('wishlist/index/add', ['item' => $_item->getId(), 'save_for_later' => 1])) ?>"
+           title="<?= $block->escapeHtml(__('Save for Later')) ?>"
+           class="action save-for-later">
+            <span><?= $block->escapeHtml(__('Save for Later')) ?></span>
+        </a>
+        <a href="#" class="action remove" title="<?= $block->escapeHtml(__('Remove item')) ?>" data-post='<?= /* @noEscape */ $block->getRemoveParams($_item) ?>'>
+            <span><?= $block->escapeHtml(__('Remove item')) ?></span>
+        </a>
+    </div>
+<?php endif ?>

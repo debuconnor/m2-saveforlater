@@ -1,0 +1,17 @@
+<?php if ($block->isWishlistEnabled() && $block->getProduct() instanceof \Magento\Catalog\Model\Product): ?>
+    <div class="actions wishlist">
+        <a href="#"
+           class="action towishlist"
+           title="<?= $block->escapeHtml(__('Add to Wishlist')) ?>"
+           aria-label="<?= $block->escapeHtml(__('Add to Wishlist')) ?>"
+           data-post='<?= /* @noEscape */ $block->getAddToWishlistParams() ?>'>
+            <?= $block->escapeHtml(__('Add to Wishlist')) ?>
+        </a>
+        <a href="<?= $block->escapeUrl($block->getSaveForLaterUrl()) ?>"
+            class="action save-for-later"
+            title="<?= $block->escapeHtml(__('Save for Later')) ?>"
+            aria-label="<?= $block->escapeHtml(__('Save for Later')) ?>">
+            <?= $block->escapeHtml(__('Save for Later')) ?>
+        </a>
+    </div>
+<?php endif; ?>

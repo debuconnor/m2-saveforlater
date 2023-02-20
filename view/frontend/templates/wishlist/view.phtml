@@ -1,0 +1,68 @@
+<?php if ($block->getItemsCount()): ?>
+    <div class="block block-wishlist" id="wishlist-view-form">
+        <div class="block-title">
+            <strong id="block-wishlist-heading" role="heading" aria-level="2"><?= $block->escapeHtml(__('My Wish List')) ?></strong>
+        </div>
+        <div class="block-content">
+            <?= $block->getChildHtml('toolbar') ?>
+            <?php if ($block->getMessage()): ?>
+                <div class="message notice"><?= $block->escapeHtml($block->getMessage()) ?></div>
+            <?php endif ?>
+            <form action="<?= $block->escapeUrl($block->getWishlistPostData()->getUpdateAction()) ?>"
+                  method="post"
+                  id="wishlist-view-form"
+                  data-role="save-for-later-form"
+                  data-save-for-later-url="<?= $block->escapeUrl($block->getSaveForLaterUrl()) ?>">
+                <?= $block->getBlockHtml('formkey') ?>
+                <fieldset>
+                    <table class="data table wishlist" id="wishlist-table">
+                        <caption class="table-caption"><?= $block->escapeHtml(__('Saved Items')) ?></caption>
+                        <thead>
+                            <tr>
+                                <th class="col thumbnail" scope="col"><?= $block->escapeHtml(__('Image')) ?></th>
+                                <th class="col name" scope="col"><?= $block->escapeHtml(__('Product Name')) ?></th>
+                                <th class="col price" scope="col"><?= $block->escapeHtml(__('Price')) ?></th>
+                                <th class="col action" scope="col"><?= $block->escapeHtml(__('Action')) ?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($block->getItems() as $_item): ?>
+                                <tr>
+                                    <td class="col thumbnail" data-title="<?= $block->escapeHtml(__('Image')) ?>">
+                                        <?php if ($_item->getProduct()->getThumbnail()): ?>
+                                            <a href="<?= $block->escapeUrl($_item->getProduct()->getProductUrl()) ?>" class="product-item-photo">
+                                                <?= $block->getImage($_item->getProduct(), 'thumbnail') ?>
+                                            </a>
+                                        <?php endif ?>
+                                    </td>
+                                    <td class="col name" data-title="<?= $block->escapeHtml(__('Product Name')) ?>">
+                                        <a href="<?= $block->escapeUrl($_item->getProduct()->getProductUrl()) ?>" class="product-item-link">
+                                            <?= $block->escapeHtml($_item->getName()) ?>
+                                        </a>
+                                        <?= $block->escapeHtml($_item->getDescription()) ?>
+                                    </td>
+                                    <td class="col price" data-title="<?= $block->escapeHtml(__('Price')) ?>">
+                                        <?= $block->escapeHtml($_item->getPrice()) ?>
+                                    </td>
+                                    <td class="col action" data-title="<?= $block->escapeHtml(__('Action')) ?>">
+                                        <a href="<?= $block->escapeUrl($block->getMoveToCartUrl($_item)) ?>"
+                                           class="action to-cart"
+                                           title="<?= $block->escapeHtml(__('Move to Cart')) ?>"
+                                           aria-label="<?= $block->escapeHtml(__('Move to Cart')) ?>">
+                                            <?= $block->escapeHtml(__('Move to Cart')) ?>
+                                        </a>
+                                        <a href="<?= $block->escapeUrl($block->getRemoveUrl($_item)) ?>                                         class="action remove"
+                                           title="<?= $block->escapeHtml(__('Remove item')) ?>"
+                                           aria-label="<?= $block->escapeHtml(__('Remove item')) ?>">
+                                            <?= $block->escapeHtml(__('Remove')) ?>
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php endforeach ?>
+                        </tbody>
+                    </table>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+<?php endif ?>
